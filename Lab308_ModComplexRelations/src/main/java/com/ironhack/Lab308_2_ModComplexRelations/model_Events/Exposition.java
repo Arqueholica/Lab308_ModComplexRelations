@@ -7,5 +7,8 @@ import jakarta.persistence.Entity;
 
 
 public class Exposition extends Event{
+
+    public Exposition() {
+    }
 }
 
