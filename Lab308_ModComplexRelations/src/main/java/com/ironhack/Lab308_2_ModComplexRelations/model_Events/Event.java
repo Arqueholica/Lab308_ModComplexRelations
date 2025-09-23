@@ -1,9 +1,6 @@
 package com.ironhack.Lab308_2_ModComplexRelations.model_Events;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 import java.text.DecimalFormat;
@@ -11,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 
 public class Event {
     @Id
@@ -20,10 +18,24 @@ public class Event {
     private Date event_date;
     private DecimalFormat event_duration;
     private String event_location;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "event_Guests",
+            joinColumns = @JoinColumn (name = "event_id"),
+            inverseJoinColumns = @JoinColumn (name = "guest_id")
+    )
+
     private List<Guest> guestList;
+
+
+
 
     public Event() {
     }
+
+
 
     public Integer getEvent_ID() {
         return event_ID;
